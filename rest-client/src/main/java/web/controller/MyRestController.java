@@ -20,9 +20,6 @@ public class MyRestController {
     private UserService userService;
 
     @Autowired
-    private RoleService roleService;
-
-    @Autowired
     private BCryptPasswordEncoder bCryptEncoder;
 
     @PostMapping("add/{role}")
@@ -81,29 +78,6 @@ public class MyRestController {
     public ResponseEntity<Void> updateUser(@RequestBody User user, @PathVariable Long role) {
         ResponseEntity<Void> resp;
 
-        /*User oldUser = userService.getUserById(user.getId());
-
-        if(user.getFirstName().isEmpty()) {
-            user.setFirstName(oldUser.getFirstName());
-        }
-
-        if(user.getLastName().isEmpty()) {
-            user.setLastName(oldUser.getLastName());
-        }
-
-        if(user.getAge() == null) {
-            user.setAge(oldUser.getAge());
-        }
-
-        if (user.getEmail().isEmpty()) {
-            user.setEmail(oldUser.getEmail());
-        }
-
-        if(user.getPassword().isEmpty()) {
-            user.setPassword(oldUser.getPassword());
-        } else {
-            user.setPassword(bCryptEncoder.encode(user.getPassword()));
-        }*/
         //todo здесь могут быть проблемы
         user.setPassword(bCryptEncoder.encode(user.getPassword()));
 

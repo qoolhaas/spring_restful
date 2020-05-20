@@ -1,7 +1,5 @@
 package web.dto;
 
-import java.util.Set;
-
 public class UserResponseDTO {
     private Long id;
 
@@ -14,8 +12,6 @@ public class UserResponseDTO {
     private Long age;
 
     private String password;
-
-    //private Set<RoleResponseDTO> roles;
 
     public Long getId() {
         return id;
@@ -56,14 +52,6 @@ public class UserResponseDTO {
     public void setAge(Long age) {
         this.age = age;
     }
-
-    /*public Set<RoleResponseDTO> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<RoleResponseDTO> roles) {
-        this.roles = roles;
-    }*/
 
     public String getPassword() {
         return password;

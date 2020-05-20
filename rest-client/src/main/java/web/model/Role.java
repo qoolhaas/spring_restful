@@ -1,6 +1,5 @@
 package web.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -19,8 +18,6 @@ public class Role implements GrantedAuthority {
     private String authority;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@ManyToMany(mappedBy = "roles", cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
-    //@JsonIgnore
     private Set<User> users;
 
     public Role() {}

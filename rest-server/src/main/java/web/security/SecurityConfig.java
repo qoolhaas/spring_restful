@@ -1,6 +1,5 @@
 package web.security;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import web.service.MyBasicAuthenticationEntryPoint;
 
 @Configuration
@@ -24,13 +24,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 //.antMatchers(HttpMethod.GET, "/users/list").hasRole("ADMIN")
-                //.anyRequest().authenticated()
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
+                //.anyRequest().permitAll()
                 .and()
                 .httpBasic()
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .sessionManagement().disable();
+
+        http.logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
         http.exceptionHandling().accessDeniedPage("/login");
     }
@@ -38,15 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //todo посмотри что в примерах используется в качестве модели, может в этом дело
-        auth.inMemoryAuthentication().withUser("admin")
-                .password("password").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("admis")
+                .password(passwordEncoder().encode("paccword")).authorities("ADMIN");
     }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
-    public ModelMapper modelMapper() { return new ModelMapper(); }
 }

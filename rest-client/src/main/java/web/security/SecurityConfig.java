@@ -1,10 +1,13 @@
 package web.security;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -59,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
                 //страницы аутентификаци доступна всем
+                //todo протести секьюрность на странице юзера
                 .antMatchers("/login").anonymous()
                 .antMatchers("/registration").anonymous()
                 .antMatchers("/user").hasAnyRole("USER", "ADMIN")
@@ -66,7 +70,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/list").hasRole("ADMIN")
                 .antMatchers("/css/**").permitAll()
                 .anyRequest().authenticated()
-                //.anyRequest().permitAll()
 
                 .and().exceptionHandling().accessDeniedHandler(new MyAccessDeniedHandler());
     }
