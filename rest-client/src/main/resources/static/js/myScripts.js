@@ -174,11 +174,16 @@ $(function () {
             return $(this).text();
         });
 
-        $('#editId').val(data[0]);
+        /*$('#editId').val(data[0]);
         $('#eFirstName').attr('placeholder', data[1]);
         $('#eLastName').attr('placeholder', data[2]);
         $('#eAge').val(data[3]);
-        $('#eEmail').attr('placeholder', data[4]);
+        $('#eEmail').attr('placeholder', data[4]);*/
+        $('#editId').val(data[0]);
+        $('#eFirstName').val(data[1]);
+        $('#eLastName').val(data[2]);
+        $('#eAge').val(data[3]);
+        $('#eEmail').val(data[4]);
     });
 });
 

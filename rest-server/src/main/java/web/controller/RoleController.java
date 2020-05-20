@@ -40,12 +40,17 @@ public class RoleController {
         return ResponseEntity.ok(roleService.getRoleById(id));
     }
 
-    @GetMapping("getset/{id}")
+/*    @GetMapping("getset/{id}")
     public ResponseEntity<Set<RoleStoreDTO>> getSet(@PathVariable Long id) {
         return ResponseEntity.ok(roleService.getAuthorityById(id).stream()
                 .map(x -> modelMapper.map(x, RoleStoreDTO.class))
                 .collect(Collectors.toSet())
         );
+    }*/
+
+    @GetMapping("getset/{id}")
+    public ResponseEntity<Set<Role>> getSet(@PathVariable Long id) {
+        return ResponseEntity.ok(roleService.getAuthorityById(id));
     }
 
     @DeleteMapping("delete/{id}")

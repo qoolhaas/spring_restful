@@ -17,7 +17,7 @@ public class UserResponseDTO {
 
     private String password;
 
-    private Set<RoleResponseDTO> roles;
+    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -59,11 +59,11 @@ public class UserResponseDTO {
         this.age = age;
     }
 
-    public Set<RoleResponseDTO> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<RoleResponseDTO> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 

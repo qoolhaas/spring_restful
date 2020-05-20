@@ -60,31 +60,41 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User user) {
-        /*restTemplate.postForObject(url + "save",
+    public void saveUser(User user, Long role) {
+        restTemplate.postForObject(url + "save/" + role,
                 modelMapper.map(user, UserStoreDTO.class),
-                UserStoreDTO.class);*/
-        restTemplate.postForObject(url + "save", user, User.class);
+                UserStoreDTO.class);
+        //restTemplate.postForObject(url + "save/" + role, user, User.class);
+    }
+    //todo можно ли здесь отправить обычного юзера?
+    @Override
+    public void updateUser(User user, Long role) {
+        restTemplate.postForObject(url + "update/" + role,
+                modelMapper.map(user, UserResponseDTO.class),
+                UserResponseDTO.class);
+        //restTemplate.postForObject(url + "save/" + role, user, User.class);
     }
 
     @Override
     public User getUserById(Long id) {
         Map<String, Long> params = new HashMap<>();
         params.put("id", id);
-        UserResponseDTO user = restTemplate.getForObject(url + "{id}", UserResponseDTO.class, params);
+        //UserResponseDTO user = restTemplate.getForObject(url + "{id}", UserResponseDTO.class, params);
+        User user = restTemplate.getForObject(url + "{id}", User.class, params);
 
-        return modelMapper.map(user, User.class);
+        return user;
     }
 
     @Override
     public User getUserByEmail(String email) {
         Map<String, String> params = new HashMap<>();
         params.put("email", email);
-        UserResponseDTO user = restTemplate.getForObject(url + "email/{email}", UserResponseDTO.class, params);
+        //UserResponseDTO user = restTemplate.getForObject(url + "email/{email}", UserResponseDTO.class, params);
+        User user = restTemplate.getForObject(url + "email/{email}", User.class, params);
 
-        return modelMapper.map(user, User.class);
+        return user;
     }
-
+    //todo может загрузка в джейкьюэри связана с нахождением методов, т.е. в какое время что прогружается
     @Override
     public void deleteUser(Long id) {
         Map<String, Long> params = new HashMap<>();

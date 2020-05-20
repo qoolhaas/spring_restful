@@ -19,6 +19,7 @@ public class RoleServiceImpl implements RoleService {
     private RestTemplate restTemplate;
     String url  = "http://localhost:8080/roles/";
 
+    //todo сделать эту штуку с дто
     @Override
     public void addRole(Role role) {
         restTemplate.postForObject(url + "save", role, Role.class);

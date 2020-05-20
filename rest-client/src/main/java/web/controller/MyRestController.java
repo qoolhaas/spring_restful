@@ -34,9 +34,8 @@ public class MyRestController {
             resp = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             try {
-                user.setRoles(roleService.getAuthorityById(role));
                 user.setPassword(bCryptEncoder.encode(user.getPassword()));
-                userService.saveUser(user);
+                userService.saveUser(user, role);
                 resp = new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
                 resp = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -82,7 +81,7 @@ public class MyRestController {
     public ResponseEntity<Void> updateUser(@RequestBody User user, @PathVariable Long role) {
         ResponseEntity<Void> resp;
 
-        User oldUser = userService.getUserById(user.getId());
+        /*User oldUser = userService.getUserById(user.getId());
 
         if(user.getFirstName().isEmpty()) {
             user.setFirstName(oldUser.getFirstName());
@@ -104,11 +103,12 @@ public class MyRestController {
             user.setPassword(oldUser.getPassword());
         } else {
             user.setPassword(bCryptEncoder.encode(user.getPassword()));
-        }
+        }*/
+        //todo здесь могут быть проблемы
+        user.setPassword(bCryptEncoder.encode(user.getPassword()));
 
         try {
-            user.setRoles(roleService.getAuthorityById(role));
-            userService.saveUser(user);
+            userService.updateUser(user, role);
             resp = new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             resp = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

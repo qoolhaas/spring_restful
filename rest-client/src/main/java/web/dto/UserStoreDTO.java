@@ -15,7 +15,7 @@ public class UserStoreDTO {
 
     private String password;
 
-    private Set<RoleStoreDTO> roles;
+    //private Set<RoleStoreDTO> roles;
 
     public String getFirstName() {
         return firstName;
@@ -57,11 +57,11 @@ public class UserStoreDTO {
         this.password = password;
     }
 
-    public Set<RoleStoreDTO> getRoles() {
+    /*public Set<RoleStoreDTO> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<RoleStoreDTO> roles) {
         this.roles = roles;
-    }
+    }*/
 }

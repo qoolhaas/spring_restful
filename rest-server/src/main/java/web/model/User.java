@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(
         name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})}
 )
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User implements UserDetails {
     @Id
     @Column(name = "id")
@@ -38,9 +38,9 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-    //@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
-    @JsonBackReference
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+    //@JsonBackReference
+    //@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles;
@@ -123,7 +123,7 @@ public class User implements UserDetails {
     }*/
 
     @Override
-    //@JsonIgnore
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
     }
