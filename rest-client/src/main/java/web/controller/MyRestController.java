@@ -78,7 +78,6 @@ public class MyRestController {
     public ResponseEntity<Void> updateUser(@RequestBody User user, @PathVariable Long role) {
         ResponseEntity<Void> resp;
 
-        //todo здесь могут быть проблемы
         user.setPassword(bCryptEncoder.encode(user.getPassword()));
 
         try {

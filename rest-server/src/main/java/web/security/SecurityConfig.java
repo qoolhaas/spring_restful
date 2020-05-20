@@ -19,13 +19,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {//todo inMemoryAuth
-        //Disable sessions
+    protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                //.antMatchers(HttpMethod.GET, "/users/list").hasRole("ADMIN")
                 .anyRequest().authenticated()
-                //.anyRequest().permitAll()
                 .and()
                 .httpBasic()
                 .authenticationEntryPoint(authenticationEntryPoint)
@@ -39,7 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //todo посмотри что в примерах используется в качестве модели, может в этом дело
         auth.inMemoryAuthentication().withUser("admis")
                 .password(passwordEncoder().encode("paccword")).authorities("ADMIN");
     }

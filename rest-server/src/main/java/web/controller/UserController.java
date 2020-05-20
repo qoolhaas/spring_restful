@@ -60,11 +60,9 @@ public class UserController {
         if (user.getEmail().isEmpty()) {
             user.setEmail(oldUser.getEmail());
         }
-        //todo вот тут скорее всего дублируется шифровка
+
         if(user.getPassword().isEmpty()) {
             user.setPassword(oldUser.getPassword());
-        } else {
-            user.setPassword(bCryptEncoder.encode(user.getPassword()));
         }
 
         try {

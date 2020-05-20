@@ -22,7 +22,7 @@ public class User implements UserDetails {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //todo приватные поля в других проектах
+
     @Column
     private String firstName;
 

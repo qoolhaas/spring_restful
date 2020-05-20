@@ -10,7 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +18,6 @@ public class Role implements GrantedAuthority {
     @Column
     private String authority;
 
-    //@JsonManagedReference
-    //@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ManyToMany(mappedBy = "roles", cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JsonIgnore
     private Set<User> users;

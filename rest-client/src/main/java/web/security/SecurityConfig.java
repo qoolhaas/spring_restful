@@ -62,7 +62,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
                 //страницы аутентификаци доступна всем
-                //todo протести секьюрность на странице юзера
                 .antMatchers("/login").anonymous()
                 .antMatchers("/registration").anonymous()
                 .antMatchers("/user").hasAnyRole("USER", "ADMIN")

@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.Set;
 
 
-//todo убрать гибернейт аннотации
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
